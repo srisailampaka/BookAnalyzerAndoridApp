@@ -44,8 +44,7 @@ public class BarcodeAdapter extends BaseAdapter {
 	public BarcodeAdapter(Context context, ArrayList<Details> detailInfoList) {
 		mContext = context;
 		listItems = detailInfoList;
-		vi = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -71,29 +70,26 @@ public class BarcodeAdapter extends BaseAdapter {
 			convertView = vi.inflate(R.layout.item_barcode_view, null);
 			holder = new ViewHolder();
 			convertView.setId(position);
-			holder.imageView = (ImageView) convertView
-					.findViewById(R.id.barcode_image);
-			holder.bookName = (TextView) convertView
-					.findViewById(R.id.subject_name);
-			holder.pageNumber = (TextView) convertView
-					.findViewById(R.id.page_number);
-			holder.delete = (Button) convertView
-					.findViewById(R.id.delete_button);
-			holder.getInfo=(Button)convertView.findViewById(R.id.getInfo_button);
+			holder.imageView = (ImageView) convertView.findViewById(R.id.barcode_image);
+			holder.bookName = (TextView) convertView.findViewById(R.id.subject_name);
+			holder.pageNumber = (TextView) convertView.findViewById(R.id.page_number);
+			holder.delete = (Button) convertView.findViewById(R.id.delete_button);
+			holder.getInfo = (Button) convertView.findViewById(R.id.getInfo_button);
 			holder.delete.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					(new DeleteQr()).execute("http://myapplications.net46.net/delete.php?sno="+listItems.get(position).getSno());
+					(new DeleteQr()).execute(
+							"http://myapplications.net46.net/delete.php?sno=" + listItems.get(position).getSno());
 
 				}
 			});
-			
+
 			holder.getInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					createDoilogForGetInfo((Details)getItem(position));
+					createDoilogForGetInfo((Details) getItem(position));
 
 				}
 			});
@@ -102,8 +98,7 @@ public class BarcodeAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 
-					createDoilog(convertStringToImageView(((Details)getItem(position))
-							.getQrimage()));
+					createDoilog(convertStringToImageView(((Details) getItem(position)).getQrimage()));
 				}
 			});
 
@@ -112,10 +107,9 @@ public class BarcodeAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		if (listItems.get(position).getQrimage() != null) {
-			holder.imageView.setImageBitmap(convertStringToImageView(listItems
-					.get(position).getQrimage()));
+			holder.imageView.setImageBitmap(convertStringToImageView(listItems.get(position).getQrimage()));
 			holder.bookName.setText(listItems.get(position).getBook());
-			holder.pageNumber.setText(" Pages " +listItems.get(position).getPages());
+			holder.pageNumber.setText(" Pages " + listItems.get(position).getPages());
 		}
 		return convertView;
 	}
@@ -131,8 +125,7 @@ public class BarcodeAdapter extends BaseAdapter {
 
 	public Bitmap convertStringToImageView(String strBase64) {
 		byte[] decodedString = Base64.decode(strBase64, Base64.DEFAULT);
-		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
-				decodedString.length);
+		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 		return decodedByte;
 	}
 
@@ -145,14 +138,11 @@ public class BarcodeAdapter extends BaseAdapter {
 
 		imageView.setImageBitmap(bitmap);
 
-		dialog.getWindow().setLayout(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
+		dialog.getWindow().setLayout(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		dialog.show();
 
 	}
 
-	
-	
 	protected void createDoilogForGetInfo(Details details) {
 		final Dialog dialog = new Dialog(mContext);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -167,7 +157,8 @@ public class BarcodeAdapter extends BaseAdapter {
 		TextView avgSentense = (TextView) dialog.findViewById(R.id.avg_senteses_name);
 		TextView ri = (TextView) dialog.findViewById(R.id.ri_name);
 		TextView pages = (TextView) dialog.findViewById(R.id.pages_name);
-
+		TextView reader = (TextView) dialog.findViewById(R.id.reader_name);
+		reader.setText(details.getReader());
 		book.setText(details.getBook());
 		subject.setText(details.getSubject());
 		article.setText(details.getArticle());
@@ -178,7 +169,6 @@ public class BarcodeAdapter extends BaseAdapter {
 		ri.setText(details.getRi());
 		pages.setText(details.getPages());
 
-
 		words.setText(details.getWords());
 		avgWords.setText(details.getAvgwords());
 		sentense.setText(details.getSentenses());
@@ -186,11 +176,11 @@ public class BarcodeAdapter extends BaseAdapter {
 		ri.setText(details.getRi());
 		pages.setText(details.getPages());
 
-		dialog.getWindow().setLayout(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
+		dialog.getWindow().setLayout(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		dialog.show();
 
 	}
+
 	public class DeleteQr extends AsyncTask<String, Void, Void> {
 		ProgressDialog dialog = new ProgressDialog(mContext);
 
@@ -218,7 +208,7 @@ public class BarcodeAdapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			dialog.cancel();
-			((ViewActivity)mContext).getDetails();
+			((ViewActivity) mContext).getDetails();
 		}
 	}
 
@@ -255,11 +245,9 @@ public class BarcodeAdapter extends BaseAdapter {
 
 	}
 
-	private String convertInputStreamToString(InputStream inputStream)
-			throws IOException {
+	private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
-		BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(inputStream));
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 		String line = "";
 		String result = "";
 		try {

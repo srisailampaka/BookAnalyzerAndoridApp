@@ -267,6 +267,8 @@ public class PDFViewActivity extends Activity implements OnPageChangeListener {
 		paraList.add(new BasicNameValuePair("qrimage", bitmapQrcode));
 		paraList.add(new BasicNameValuePair("subject", etSubject.getText()
 				.toString()));
+		paraList.add(new BasicNameValuePair("reader", etReaderName.getText()
+				.toString()));
 		paraList.add(new BasicNameValuePair("article", etArticle.getText()
 				.toString()));
 		paraList.add(new BasicNameValuePair("book", etBookName.getText()

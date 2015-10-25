@@ -10,7 +10,7 @@
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<application
-		android:icon="@drawable/analysis"
+		android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" 
 		android:label="@string/app_name" >
 		<activity

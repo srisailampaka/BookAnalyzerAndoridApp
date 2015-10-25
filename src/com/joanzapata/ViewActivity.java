@@ -71,7 +71,7 @@ public class ViewActivity extends Activity {
 					JSONObject childeJson = jsonArray.getJSONObject(i);
 					detail.setSno(childeJson.optString("sno"));
 					detail.setQrimage(childeJson.optString("qrimage"));
-					
+					detail.setReader(childeJson.optString("reader"));
 					detail.setWords(childeJson.optString("words"));
 					detail.setAvgwords(childeJson.optString("avgwords"));
 					detail.setSentenses(childeJson.optString("sentenses"));
